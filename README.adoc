@@ -1,276 +1,561 @@
-= Spring Boot image:https://ci.spring.io/api/v1/teams/spring-boot/pipelines/spring-boot/jobs/build/badge["Build Status", link="https://ci.spring.io/teams/spring-boot/pipelines/spring-boot?groups=Build"] image:https://badges.gitter.im/Join Chat.svg["Chat",link="https://gitter.im/spring-projects/spring-boot?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"]
-:docs: https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference
+### 1、源码调试环境搭建
+#### 进入项目根路径，执行maven命令：
+```java 
+mvn clean install -Dmaven.test.skip=true -Dmaven.test.failure.ignore=true
+```
+
+耐心等待几分钟....
+正常情况下的日志：
+```java
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Spring Boot Tests 2.2.0.BUILD-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.1.0:clean (default-clean) @ spring-boot-tests ---
+[INFO]
+[INFO] --- maven-checkstyle-plugin:3.0.0:check (checkstyle-validation) @ spring-boot-tests ---
+[INFO]
+[INFO] --- spring-javaformat-maven-plugin:0.0.6:validate (default) @ spring-boot-tests ---
+[INFO]
+[INFO] --- build-helper-maven-plugin:3.0.0:regex-property (regex-property) @ spring-boot-tests ---
+[INFO]
+[INFO] --- maven-enforcer-plugin:3.0.0-M2:enforce (enforce-rules) @ spring-boot-tests ---
+[INFO]
+[INFO] --- flatten-maven-plugin:1.0.1:flatten (flatten) @ spring-boot-tests ---
+[INFO] Generating flattened POM of project org.springframework.boot:spring-boot-tests:pom:2.2.0.BUILD-SNAPSHOT...
+[INFO]
+[INFO] --- maven-source-plugin:3.0.1:jar-no-fork (attach-sources) @ spring-boot-tests ---
+[INFO]
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ spring-boot-tests ---
+[INFO] Skipping artifact installation
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Spring Boot Integration Tests 2.2.0.BUILD-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.1.0:clean (default-clean) @ spring-boot-integration-tests ---
+[INFO]
+[INFO] --- maven-checkstyle-plugin:3.0.0:check (checkstyle-validation) @ spring-boot-integration-tests ---
+[INFO]
+[INFO] --- spring-javaformat-maven-plugin:0.0.6:validate (default) @ spring-boot-integration-tests ---
+[INFO]
+[INFO] --- build-helper-maven-plugin:3.0.0:regex-property (regex-property) @ spring-boot-integration-tests ---
+[INFO]
+[INFO] --- maven-enforcer-plugin:3.0.0-M2:enforce (enforce-rules) @ spring-boot-integration-tests ---
+[INFO]
+[INFO] --- flatten-maven-plugin:1.0.1:flatten (flatten) @ spring-boot-integration-tests ---
+[INFO] Generating flattened POM of project org.springframework.boot:spring-boot-integration-tests:pom:2.2.0.BUILD-SNAPSHOT...
+[INFO]
+[INFO] --- maven-source-plugin:3.0.1:jar-no-fork (attach-sources) @ spring-boot-integration-tests ---
+[INFO]
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ spring-boot-integration-tests ---
+[INFO] Skipping artifact installation
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Spring Boot Configuration Processor Tests 2.2.0.BUILD-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.1.0:clean (default-clean) @ spring-boot-configuration-processor-tests ---
+[INFO] Deleting E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-configuration-processor-tests\target
+[INFO]
+[INFO] --- maven-checkstyle-plugin:3.0.0:check (checkstyle-validation) @ spring-boot-configuration-processor-tests ---
+[INFO]
+[INFO] --- spring-javaformat-maven-plugin:0.0.6:validate (default) @ spring-boot-configuration-processor-tests ---
+[INFO]
+[INFO] --- build-helper-maven-plugin:3.0.0:regex-property (regex-property) @ spring-boot-configuration-processor-tests ---
+[INFO]
+[INFO] --- maven-enforcer-plugin:3.0.0-M2:enforce (enforce-rules) @ spring-boot-configuration-processor-tests ---
+[INFO]
+[INFO] --- maven-resources-plugin:3.1.0:resources (default-resources) @ spring-boot-configuration-processor-tests ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-configuration-processor-tests\src\main\resources
+[INFO]
+[INFO] --- flatten-maven-plugin:1.0.1:flatten (flatten) @ spring-boot-configuration-processor-tests ---
+[INFO] Generating flattened POM of project org.springframework.boot:spring-boot-configuration-processor-tests:jar:2.2.0.BUILD-SNAPSHOT...
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ spring-boot-configuration-processor-tests ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 2 source files to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-configuration-processor-tests\target\classes
+[INFO]
+[INFO] --- maven-resources-plugin:3.1.0:testResources (default-testResources) @ spring-boot-configuration-processor-tests ---
+[INFO] Not copying test resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ spring-boot-configuration-processor-tests ---
+[INFO] Not compiling test sources
+[INFO]
+[INFO] --- maven-surefire-plugin:2.22.1:test (default-test) @ spring-boot-configuration-processor-tests ---
+[INFO] Tests are skipped.
+[INFO]
+[INFO] --- maven-jar-plugin:3.1.0:jar (default-jar) @ spring-boot-configuration-processor-tests ---
+[INFO] Building jar: E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-configuration-processor-tests\target\spring-boot-configuration-processor-tests-2.2.0.BUILD-SNAPSHOT.jar
+[INFO]
+[INFO] --- maven-source-plugin:3.0.1:jar-no-fork (attach-sources) @ spring-boot-configuration-processor-tests ---
+[INFO] Building jar: E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-configuration-processor-tests\target\spring-boot-configuration-processor-tests-2.2.0.BUILD-SNAPSHOT-sources.
+jar
+[INFO]
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ spring-boot-configuration-processor-tests ---
+[INFO] Skipping artifact installation
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Spring Boot DevTools Tests 2.2.0.BUILD-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.1.0:clean (default-clean) @ spring-boot-devtools-tests ---
+[INFO] Deleting E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target
+[INFO]
+[INFO] --- maven-checkstyle-plugin:3.0.0:check (checkstyle-validation) @ spring-boot-devtools-tests ---
+[INFO]
+[INFO] --- spring-javaformat-maven-plugin:0.0.6:validate (default) @ spring-boot-devtools-tests ---
+[INFO]
+[INFO] --- build-helper-maven-plugin:3.0.0:regex-property (regex-property) @ spring-boot-devtools-tests ---
+[INFO]
+[INFO] --- maven-enforcer-plugin:3.0.0-M2:enforce (enforce-rules) @ spring-boot-devtools-tests ---
+[INFO]
+[INFO] --- maven-resources-plugin:3.1.0:resources (default-resources) @ spring-boot-devtools-tests ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\src\main\resources
+[INFO]
+[INFO] --- flatten-maven-plugin:1.0.1:flatten (flatten) @ spring-boot-devtools-tests ---
+[INFO] Generating flattened POM of project org.springframework.boot:spring-boot-devtools-tests:jar:2.2.0.BUILD-SNAPSHOT...
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ spring-boot-devtools-tests ---
+[INFO] No sources to compile
+[INFO]
+[INFO] --- maven-resources-plugin:3.1.0:testResources (default-testResources) @ spring-boot-devtools-tests ---
+[INFO] Not copying test resources
+[INFO]
+[INFO] --- maven-dependency-plugin:3.1.1:copy-dependencies (copy-dependencies) @ spring-boot-devtools-tests ---
+[INFO] Copying tomcat-embed-core-9.0.13.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\tomcat-embed-core-9.0.13.jar
+[INFO] Copying spring-boot-starter-web-2.2.0.BUILD-SNAPSHOT.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\spring-boot-starter-web-2.2
+.0.BUILD-SNAPSHOT.jar
+[INFO] Copying tomcat-embed-el-9.0.13.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\tomcat-embed-el-9.0.13.jar
+[INFO] Copying jackson-datatype-jsr310-2.9.7.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\jackson-datatype-jsr310-2.9.7.jar
+[INFO] Copying classmate-1.4.0.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\classmate-1.4.0.jar
+[INFO] Copying spring-context-5.1.3.RELEASE.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\spring-context-5.1.3.RELEASE.jar
+[INFO] Copying spring-boot-starter-logging-2.2.0.BUILD-SNAPSHOT.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\spring-boot-starter-log
+ging-2.2.0.BUILD-SNAPSHOT.jar
+[INFO] Copying validation-api-2.0.1.Final.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\validation-api-2.0.1.Final.jar
+[INFO] Copying logback-core-1.2.3.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\logback-core-1.2.3.jar
+[INFO] Copying spring-jcl-5.1.3.RELEASE.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\spring-jcl-5.1.3.RELEASE.jar
+[INFO] Copying jackson-core-2.9.7.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\jackson-core-2.9.7.jar
+[INFO] Copying tomcat-embed-websocket-9.0.13.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\tomcat-embed-websocket-9.0.13.jar
+[INFO] Copying spring-beans-5.1.3.RELEASE.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\spring-beans-5.1.3.RELEASE.jar
+[INFO] Copying byte-buddy-1.9.5.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\byte-buddy-1.9.5.jar
+[INFO] Copying spring-web-5.1.3.RELEASE.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\spring-web-5.1.3.RELEASE.jar
+[INFO] Copying spring-boot-devtools-2.2.0.BUILD-SNAPSHOT.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\spring-boot-devtools-2.2.0.BUI
+LD-SNAPSHOT.jar
+[INFO] Copying jackson-datatype-jdk8-2.9.7.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\jackson-datatype-jdk8-2.9.7.jar
+[INFO] Copying logback-classic-1.2.3.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\logback-classic-1.2.3.jar
+[INFO] Copying javax.annotation-api-1.3.2.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\javax.annotation-api-1.3.2.jar
+[INFO] Copying spring-boot-starter-2.2.0.BUILD-SNAPSHOT.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\spring-boot-starter-2.2.0.BUILD
+-SNAPSHOT.jar
+[INFO] Copying jboss-logging-3.3.2.Final.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\jboss-logging-3.3.2.Final.jar
+[INFO] Copying spring-webmvc-5.1.3.RELEASE.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\spring-webmvc-5.1.3.RELEASE.jar
+[INFO] Copying jackson-annotations-2.9.0.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\jackson-annotations-2.9.0.jar
+[INFO] Copying log4j-to-slf4j-2.11.1.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\log4j-to-slf4j-2.11.1.jar
+[INFO] Copying spring-boot-starter-json-2.2.0.BUILD-SNAPSHOT.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\spring-boot-starter-json-2
+.2.0.BUILD-SNAPSHOT.jar
+[INFO] Copying spring-expression-5.1.3.RELEASE.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\spring-expression-5.1.3.RELEASE.jar
+[INFO] Copying jackson-module-parameter-names-2.9.7.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\jackson-module-parameter-names-2.9.
+7.jar
+[INFO] Copying spring-boot-2.2.0.BUILD-SNAPSHOT.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\spring-boot-2.2.0.BUILD-SNAPSHOT.jar
+[INFO] Copying slf4j-api-1.7.25.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\slf4j-api-1.7.25.jar
+[INFO] Copying spring-core-5.1.3.RELEASE.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\spring-core-5.1.3.RELEASE.jar
+[INFO] Copying hibernate-validator-6.0.13.Final.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\hibernate-validator-6.0.13.Final.jar
+[INFO] Copying spring-boot-starter-tomcat-2.2.0.BUILD-SNAPSHOT.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\spring-boot-starter-tomc
+at-2.2.0.BUILD-SNAPSHOT.jar
+[INFO] Copying spring-aop-5.1.3.RELEASE.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\spring-aop-5.1.3.RELEASE.jar
+[INFO] Copying snakeyaml-1.23.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\snakeyaml-1.23.jar
+[INFO] Copying jackson-databind-2.9.7.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\jackson-databind-2.9.7.jar
+[INFO] Copying spring-boot-autoconfigure-2.2.0.BUILD-SNAPSHOT.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\spring-boot-autoconfigure
+-2.2.0.BUILD-SNAPSHOT.jar
+[INFO] Copying jul-to-slf4j-1.7.25.jar to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\dependencies\jul-to-slf4j-1.7.25.jar
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ spring-boot-devtools-tests ---
+[INFO] Not compiling test sources
+[INFO]
+[INFO] --- maven-surefire-plugin:2.22.1:test (default-test) @ spring-boot-devtools-tests ---
+[INFO] Tests are skipped.
+[INFO]
+[INFO] --- maven-jar-plugin:3.1.0:jar (default-jar) @ spring-boot-devtools-tests ---
+[WARNING] JAR will be empty - no content was marked for inclusion!
+[INFO] Building jar: E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-devtools-tests\target\spring-boot-devtools-tests-2.2.0.BUILD-SNAPSHOT.jar
+[INFO]
+[INFO] --- maven-source-plugin:3.0.1:jar-no-fork (attach-sources) @ spring-boot-devtools-tests ---
+[INFO] No sources in project. Archive not created.
+[INFO]
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ spring-boot-devtools-tests ---
+[INFO] Skipping artifact installation
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Spring Boot Hibernate 5.2 tests 2.2.0.BUILD-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.1.0:clean (default-clean) @ spring-boot-hibernate52-tests ---
+[INFO] Deleting E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-hibernate52-tests\target
+[INFO]
+[INFO] --- maven-checkstyle-plugin:3.0.0:check (checkstyle-validation) @ spring-boot-hibernate52-tests ---
+[INFO]
+[INFO] --- spring-javaformat-maven-plugin:0.0.6:validate (default) @ spring-boot-hibernate52-tests ---
+[INFO]
+[INFO] --- build-helper-maven-plugin:3.0.0:regex-property (regex-property) @ spring-boot-hibernate52-tests ---
+[INFO]
+[INFO] --- maven-enforcer-plugin:3.0.0-M2:enforce (enforce-rules) @ spring-boot-hibernate52-tests ---
+[INFO]
+[INFO] --- maven-resources-plugin:3.1.0:resources (default-resources) @ spring-boot-hibernate52-tests ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-hibernate52-tests\src\main\resources
+[INFO]
+[INFO] --- flatten-maven-plugin:1.0.1:flatten (flatten) @ spring-boot-hibernate52-tests ---
+[INFO] Generating flattened POM of project org.springframework.boot:spring-boot-hibernate52-tests:jar:2.2.0.BUILD-SNAPSHOT...
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ spring-boot-hibernate52-tests ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-hibernate52-tests\target\classes
+[INFO]
+[INFO] --- maven-resources-plugin:3.1.0:testResources (default-testResources) @ spring-boot-hibernate52-tests ---
+[INFO] Not copying test resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ spring-boot-hibernate52-tests ---
+[INFO] Not compiling test sources
+[INFO]
+[INFO] --- maven-surefire-plugin:2.22.1:test (default-test) @ spring-boot-hibernate52-tests ---
+[INFO] Tests are skipped.
+[INFO]
+[INFO] --- maven-jar-plugin:3.1.0:jar (default-jar) @ spring-boot-hibernate52-tests ---
+[INFO] Building jar: E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-hibernate52-tests\target\spring-boot-hibernate52-tests-2.2.0.BUILD-SNAPSHOT.jar
+[INFO]
+[INFO] --- maven-source-plugin:3.0.1:jar-no-fork (attach-sources) @ spring-boot-hibernate52-tests ---
+[INFO] Building jar: E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-hibernate52-tests\target\spring-boot-hibernate52-tests-2.2.0.BUILD-SNAPSHOT-sources.jar
+[INFO]
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ spring-boot-hibernate52-tests ---
+[INFO] Skipping artifact installation
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Spring Boot Server Tests 2.2.0.BUILD-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.1.0:clean (default-clean) @ spring-boot-server-tests ---
+[INFO] Deleting E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-server-tests\target
+[INFO]
+[INFO] --- maven-checkstyle-plugin:3.0.0:check (checkstyle-validation) @ spring-boot-server-tests ---
+[INFO]
+[INFO] --- spring-javaformat-maven-plugin:0.0.6:validate (default) @ spring-boot-server-tests ---
+[INFO]
+[INFO] --- build-helper-maven-plugin:3.0.0:regex-property (regex-property) @ spring-boot-server-tests ---
+[INFO]
+[INFO] --- maven-enforcer-plugin:3.0.0-M2:enforce (enforce-rules) @ spring-boot-server-tests ---
+[INFO]
+[INFO] --- maven-resources-plugin:3.1.0:resources (default-resources) @ spring-boot-server-tests ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-server-tests\src\main\resources
+[INFO]
+[INFO] --- flatten-maven-plugin:1.0.1:flatten (flatten) @ spring-boot-server-tests ---
+[INFO] Generating flattened POM of project org.springframework.boot:spring-boot-server-tests:jar:2.2.0.BUILD-SNAPSHOT...
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ spring-boot-server-tests ---
+[INFO] No sources to compile
+[INFO]
+[INFO] --- maven-resources-plugin:3.1.0:testResources (default-testResources) @ spring-boot-server-tests ---
+[INFO] Not copying test resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ spring-boot-server-tests ---
+[INFO] Not compiling test sources
+[INFO]
+[INFO] --- maven-surefire-plugin:2.22.1:test (default-test) @ spring-boot-server-tests ---
+[INFO] Tests are skipped.
+[INFO]
+[INFO] --- maven-jar-plugin:3.1.0:jar (default-jar) @ spring-boot-server-tests ---
+[WARNING] JAR will be empty - no content was marked for inclusion!
+[INFO] Building jar: E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-server-tests\target\spring-boot-server-tests-2.2.0.BUILD-SNAPSHOT.jar
+[INFO]
+[INFO] --- maven-source-plugin:3.0.1:jar-no-fork (attach-sources) @ spring-boot-server-tests ---
+[INFO] No sources in project. Archive not created.
+[INFO]
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ spring-boot-server-tests ---
+[INFO] Skipping artifact installation
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Spring Boot Launch Script Integration Tests 2.2.0.BUILD-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.1.0:clean (default-clean) @ spring-boot-launch-script-tests ---
+[INFO] Deleting E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-launch-script-tests\target
+[INFO]
+[INFO] --- maven-checkstyle-plugin:3.0.0:check (checkstyle-validation) @ spring-boot-launch-script-tests ---
+[INFO]
+[INFO] --- spring-javaformat-maven-plugin:0.0.6:validate (default) @ spring-boot-launch-script-tests ---
+[INFO]
+[INFO] --- build-helper-maven-plugin:3.0.0:regex-property (regex-property) @ spring-boot-launch-script-tests ---
+[INFO]
+[INFO] --- maven-enforcer-plugin:3.0.0-M2:enforce (enforce-rules) @ spring-boot-launch-script-tests ---
+[INFO]
+[INFO] --- maven-resources-plugin:3.1.0:resources (default-resources) @ spring-boot-launch-script-tests ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-launch-script-tests\src\main\resources
+[INFO]
+[INFO] --- flatten-maven-plugin:1.0.1:flatten (flatten) @ spring-boot-launch-script-tests ---
+[INFO] Generating flattened POM of project org.springframework.boot:spring-boot-launch-script-tests:jar:2.2.0.BUILD-SNAPSHOT...
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ spring-boot-launch-script-tests ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 2 source files to E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-launch-script-tests\target\classes
+[INFO]
+[INFO] --- maven-resources-plugin:3.1.0:testResources (default-testResources) @ spring-boot-launch-script-tests ---
+[INFO] Not copying test resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ spring-boot-launch-script-tests ---
+[INFO] Not compiling test sources
+[INFO]
+[INFO] --- maven-surefire-plugin:2.22.1:test (default-test) @ spring-boot-launch-script-tests ---
+[INFO] Tests are skipped.
+[INFO]
+[INFO] --- maven-jar-plugin:3.1.0:jar (default-jar) @ spring-boot-launch-script-tests ---
+[INFO] Building jar: E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-launch-script-tests\target\spring-boot-launch-script-tests-2.2.0.BUILD-SNAPSHOT.jar
+[INFO]
+[INFO] --- maven-source-plugin:3.0.1:jar-no-fork (attach-sources) @ spring-boot-launch-script-tests ---
+[INFO] Building jar: E:\git-idea\spring-boot\spring-boot-tests\spring-boot-integration-tests\spring-boot-launch-script-tests\target\spring-boot-launch-script-tests-2.2.0.BUILD-SNAPSHOT-sources.jar
+[INFO]
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ spring-boot-launch-script-tests ---
+[INFO] Skipping artifact installation
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO]
+[INFO] Spring Boot Build .................................. SUCCESS [  2.306 s]
+[INFO] Spring Boot Dependencies ........................... SUCCESS [  3.630 s]
+[INFO] Spring Boot Parent ................................. SUCCESS [  0.685 s]
+[INFO] Spring Boot Tools .................................. SUCCESS [  0.321 s]
+[INFO] Spring Boot Testing Support ........................ SUCCESS [  6.052 s]
+[INFO] Spring Boot Configuration Processor ................ SUCCESS [  3.397 s]
+[INFO] Spring Boot ........................................ SUCCESS [ 31.290 s]
+[INFO] Spring Boot Test ................................... SUCCESS [  7.865 s]
+[INFO] Spring Boot Auto-Configure Annotation Processor .... SUCCESS [  0.774 s]
+[INFO] Spring Boot AutoConfigure .......................... SUCCESS [ 33.850 s]
+[INFO] Spring Boot Actuator ............................... SUCCESS [ 10.182 s]
+[INFO] Spring Boot Actuator AutoConfigure ................. SUCCESS [ 10.529 s]
+[INFO] Spring Boot Developer Tools ........................ SUCCESS [  3.796 s]
+[INFO] Spring Boot Configuration Metadata ................. SUCCESS [  0.631 s]
+[INFO] Spring Boot Starters ............................... SUCCESS [  0.926 s]
+[INFO] Spring Boot Logging Starter ........................ SUCCESS [  0.896 s]
+[INFO] Spring Boot Starter ................................ SUCCESS [  1.163 s]
+[INFO] Spring Boot Test Auto-Configure .................... SUCCESS [  3.599 s]
+[INFO] Spring Boot Test Starter ........................... SUCCESS [  1.163 s]
+[INFO] Spring Boot Properties Migrator .................... SUCCESS [  0.783 s]
+[INFO] Spring Boot Loader ................................. SUCCESS [ 53.569 s]
+[INFO] Spring Boot Loader Tools ........................... SUCCESS [  1.928 s]
+[INFO] Spring Boot Antlib ................................. SUCCESS [  5.967 s]
+[INFO] Spring Boot Gradle Plugin .......................... SUCCESS [22:30 min]
+[INFO] Spring Boot Maven Plugin ........................... SUCCESS [04:19 min]
+[INFO] Spring Boot ActiveMQ Starter ....................... SUCCESS [  2.283 s]
+[INFO] Spring Boot AMQP Starter ........................... SUCCESS [  0.479 s]
+[INFO] Spring Boot AOP Starter ............................ SUCCESS [  0.434 s]
+[INFO] Spring Boot Artemis Starter ........................ SUCCESS [  2.622 s]
+[INFO] Spring Boot JDBC Starter ........................... SUCCESS [  0.394 s]
+[INFO] Spring Boot Batch Starter .......................... SUCCESS [  0.878 s]
+[INFO] Spring Boot Cache Starter .......................... SUCCESS [  0.328 s]
+[INFO] Spring Boot Spring Cloud Connectors Starter ........ SUCCESS [  0.718 s]
+[INFO] Spring Boot Data Cassandra Starter ................. SUCCESS [  1.990 s]
+[INFO] Spring Boot Data Cassandra Reactive Starter ........ SUCCESS [  0.752 s]
+[INFO] Spring Boot Data Couchbase Starter ................. SUCCESS [  1.586 s]
+[INFO] Spring Boot Data Couchbase Reactive Starter ........ SUCCESS [  0.485 s]
+[INFO] Spring Boot Data Elasticsearch Starter ............. SUCCESS [  3.752 s]
+[INFO] Spring Boot Data JDBC Starter ...................... SUCCESS [  0.538 s]
+[INFO] Spring Boot Data JPA Starter ....................... SUCCESS [  1.852 s]
+[INFO] Spring Boot Data LDAP Starter ...................... SUCCESS [  0.364 s]
+[INFO] Spring Boot Data MongoDB Starter ................... SUCCESS [  0.930 s]
+[INFO] Spring Boot Data MongoDB Reactive Starter .......... SUCCESS [  0.378 s]
+[INFO] Spring Boot Data Neo4j Starter ..................... SUCCESS [  1.069 s]
+[INFO] Spring Boot Data Redis Starter ..................... SUCCESS [  0.903 s]
+[INFO] Spring Boot Data Redis Reactive Starter ............ SUCCESS [  0.481 s]
+[INFO] Spring Boot Json Starter ........................... SUCCESS [  0.460 s]
+[INFO] Spring Boot Tomcat Starter ......................... SUCCESS [  0.770 s]
+[INFO] Spring Boot Web Starter ............................ SUCCESS [  0.743 s]
+[INFO] Spring Boot Data REST Starter ...................... SUCCESS [  0.645 s]
+[INFO] Spring Boot Data Solr Starter ...................... SUCCESS [  1.074 s]
+[INFO] Spring Boot FreeMarker Starter ..................... SUCCESS [  0.387 s]
+[INFO] Spring Boot Groovy Templates Starter ............... SUCCESS [  1.090 s]
+[INFO] Spring Boot HATEOAS Starter ........................ SUCCESS [  0.453 s]
+[INFO] Spring Boot Integration Starter .................... SUCCESS [  0.581 s]
+[INFO] Spring Boot Validation Starter ..................... SUCCESS [  0.304 s]
+[INFO] Spring Boot Jersey Starter ......................... SUCCESS [  1.982 s]
+[INFO] Spring Boot Jetty Starter .......................... SUCCESS [  0.978 s]
+[INFO] Spring Boot JOOQ Starter ........................... SUCCESS [  0.445 s]
+[INFO] Spring Boot Atomikos JTA Starter ................... SUCCESS [  0.753 s]
+[INFO] Spring Boot Bitronix JTA Starter ................... SUCCESS [  0.365 s]
+[INFO] Spring Boot Log4j 2 Starter ........................ SUCCESS [  0.671 s]
+[INFO] Spring Boot Mail Starter ........................... SUCCESS [  0.412 s]
+[INFO] Spring Boot Mustache Starter ....................... SUCCESS [  0.344 s]
+[INFO] Spring Boot Actuator Starter ....................... SUCCESS [  0.594 s]
+[INFO] Spring Boot OAuth2/OpenID Connect Client Starter ... SUCCESS [ 13.795 s]
+[INFO] Spring Boot OAuth2 Resource Server Starter ......... SUCCESS [  0.329 s]
+[INFO] Spring Boot Starter Parent ......................... SUCCESS [  0.260 s]
+[INFO] Spring Boot Quartz Starter ......................... SUCCESS [  0.395 s]
+[INFO] Spring Boot Reactor Netty Starter .................. SUCCESS [  0.679 s]
+[INFO] Spring Boot Security Starter ....................... SUCCESS [  0.363 s]
+[INFO] Spring Boot Thymeleaf Starter ...................... SUCCESS [  0.448 s]
+[INFO] Spring Boot Undertow Starter ....................... SUCCESS [  1.178 s]
+[INFO] Spring Boot WebFlux Starter ........................ SUCCESS [  0.615 s]
+[INFO] Spring Boot WebSocket Starter ...................... SUCCESS [  0.483 s]
+[INFO] Spring Boot Web Services Starter ................... SUCCESS [  0.998 s]
+[INFO] Spring Boot CLI .................................... SUCCESS [  9.669 s]
+[INFO] Spring Boot Docs ................................... SUCCESS [  5.523 s]
+[INFO] Spring Boot Build .................................. SUCCESS [  0.170 s]
+[INFO] Spring Boot Samples Invoker ........................ SUCCESS [02:20 min]
+[INFO] Spring Boot Tests .................................. SUCCESS [  0.210 s]
+[INFO] Spring Boot Integration Tests ...................... SUCCESS [  0.177 s]
+[INFO] Spring Boot Configuration Processor Tests .......... SUCCESS [  0.452 s]
+[INFO] Spring Boot DevTools Tests ......................... SUCCESS [  0.591 s]
+[INFO] Spring Boot Hibernate 5.2 tests .................... SUCCESS [  0.811 s]
+[INFO] Spring Boot Server Tests ........................... SUCCESS [  0.367 s]
+[INFO] Spring Boot Launch Script Integration Tests ........ SUCCESS [  1.093 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 33:54 min
+[INFO] Finished at: 2018-12-04T12:44:15+08:00
+[INFO] Final Memory: 667M/1335M
+[INFO] ------------------------------------------------------------------------
+```
+异常情况下的日志：
+```java
+org.apache.commons.exec.ExecuteException: Process exited with an error: 1 (Exit value: 1)
+        at org.apache.commons.exec.DefaultExecutor.executeInternal(DefaultExecutor.java:404)
+        at org.apache.commons.exec.DefaultExecutor.execute(DefaultExecutor.java:166)
+        at org.codehaus.mojo.exec.ExecMojo.executeCommandLine(ExecMojo.java:804)
+        at org.codehaus.mojo.exec.ExecMojo.executeCommandLine(ExecMojo.java:751)
+        at org.codehaus.mojo.exec.ExecMojo.execute(ExecMojo.java:313)
+        at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:134)
+        at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:208)
+        at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:154)
+        at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:146)
+        at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:117)
+        at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:81)
+        at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:51)
+        at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+        at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:309)
+        at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:194)
+        at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:107)
+        at org.apache.maven.cli.MavenCli.execute(MavenCli.java:993)
+        at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:345)
+        at org.apache.maven.cli.MavenCli.main(MavenCli.java:191)
+        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.lang.reflect.Method.invoke(Method.java:498)
+        at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:289)
+        at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:229)
+        at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:415)
+        at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:356)
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO]
+[INFO] Spring Boot Build .................................. SUCCESS [  2.567 s]
+[INFO] Spring Boot Dependencies ........................... SUCCESS [  5.921 s]
+[INFO] Spring Boot Parent ................................. SUCCESS [  0.610 s]
+[INFO] Spring Boot Tools .................................. SUCCESS [  0.356 s]
+[INFO] Spring Boot Testing Support ........................ SUCCESS [  6.503 s]
+[INFO] Spring Boot Configuration Processor ................ SUCCESS [  5.442 s]
+[INFO] Spring Boot ........................................ SUCCESS [ 55.985 s]
+[INFO] Spring Boot Test ................................... SUCCESS [ 13.099 s]
+[INFO] Spring Boot Auto-Configure Annotation Processor .... SUCCESS [  1.498 s]
+[INFO] Spring Boot AutoConfigure .......................... SUCCESS [01:00 min]
+[INFO] Spring Boot Actuator ............................... SUCCESS [ 17.455 s]
+[INFO] Spring Boot Actuator AutoConfigure ................. SUCCESS [ 15.215 s]
+[INFO] Spring Boot Developer Tools ........................ SUCCESS [  4.353 s]
+[INFO] Spring Boot Configuration Metadata ................. SUCCESS [  0.719 s]
+[INFO] Spring Boot Starters ............................... SUCCESS [  1.849 s]
+[INFO] Spring Boot Logging Starter ........................ SUCCESS [  1.770 s]
+[INFO] Spring Boot Starter ................................ SUCCESS [  1.314 s]
+[INFO] Spring Boot Test Auto-Configure .................... SUCCESS [  4.109 s]
+[INFO] Spring Boot Test Starter ........................... SUCCESS [  1.314 s]
+[INFO] Spring Boot Properties Migrator .................... SUCCESS [  0.540 s]
+[INFO] Spring Boot Loader ................................. SUCCESS [01:23 min]
+[INFO] Spring Boot Loader Tools ........................... SUCCESS [  2.496 s]
+[INFO] Spring Boot Antlib ................................. SUCCESS [ 16.718 s]
+[INFO] Spring Boot Gradle Plugin .......................... FAILURE [03:37 min]
+[INFO] Spring Boot Maven Plugin ........................... SKIPPED
+[INFO] Spring Boot ActiveMQ Starter ....................... SKIPPED
+[INFO] Spring Boot AMQP Starter ........................... SKIPPED
+[INFO] Spring Boot AOP Starter ............................ SKIPPED
+[INFO] Spring Boot Artemis Starter ........................ SKIPPED
+[INFO] Spring Boot JDBC Starter ........................... SKIPPED
+[INFO] Spring Boot Batch Starter .......................... SKIPPED
+[INFO] Spring Boot Cache Starter .......................... SKIPPED
+[INFO] Spring Boot Spring Cloud Connectors Starter ........ SKIPPED
+[INFO] Spring Boot Data Cassandra Starter ................. SKIPPED
+[INFO] Spring Boot Data Cassandra Reactive Starter ........ SKIPPED
+[INFO] Spring Boot Data Couchbase Starter ................. SKIPPED
+[INFO] Spring Boot Data Couchbase Reactive Starter ........ SKIPPED
+[INFO] Spring Boot Data Elasticsearch Starter ............. SKIPPED
+[INFO] Spring Boot Data JDBC Starter ...................... SKIPPED
+[INFO] Spring Boot Data JPA Starter ....................... SKIPPED
+[INFO] Spring Boot Data LDAP Starter ...................... SKIPPED
+[INFO] Spring Boot Data MongoDB Starter ................... SKIPPED
+[INFO] Spring Boot Data MongoDB Reactive Starter .......... SKIPPED
+[INFO] Spring Boot Data Neo4j Starter ..................... SKIPPED
+[INFO] Spring Boot Data Redis Starter ..................... SKIPPED
+[INFO] Spring Boot Data Redis Reactive Starter ............ SKIPPED
+[INFO] Spring Boot Json Starter ........................... SKIPPED
+[INFO] Spring Boot Tomcat Starter ......................... SKIPPED
+[INFO] Spring Boot Web Starter ............................ SKIPPED
+[INFO] Spring Boot Data REST Starter ...................... SKIPPED
+[INFO] Spring Boot Data Solr Starter ...................... SKIPPED
+[INFO] Spring Boot FreeMarker Starter ..................... SKIPPED
+[INFO] Spring Boot Groovy Templates Starter ............... SKIPPED
+[INFO] Spring Boot HATEOAS Starter ........................ SKIPPED
+[INFO] Spring Boot Integration Starter .................... SKIPPED
+[INFO] Spring Boot Validation Starter ..................... SKIPPED
+[INFO] Spring Boot Jersey Starter ......................... SKIPPED
+[INFO] Spring Boot Jetty Starter .......................... SKIPPED
+[INFO] Spring Boot JOOQ Starter ........................... SKIPPED
+[INFO] Spring Boot Atomikos JTA Starter ................... SKIPPED
+[INFO] Spring Boot Bitronix JTA Starter ................... SKIPPED
+[INFO] Spring Boot Log4j 2 Starter ........................ SKIPPED
+[INFO] Spring Boot Mail Starter ........................... SKIPPED
+[INFO] Spring Boot Mustache Starter ....................... SKIPPED
+[INFO] Spring Boot Actuator Starter ....................... SKIPPED
+[INFO] Spring Boot OAuth2/OpenID Connect Client Starter ... SKIPPED
+[INFO] Spring Boot OAuth2 Resource Server Starter ......... SKIPPED
+[INFO] Spring Boot Starter Parent ......................... SKIPPED
+[INFO] Spring Boot Quartz Starter ......................... SKIPPED
+[INFO] Spring Boot Reactor Netty Starter .................. SKIPPED
+[INFO] Spring Boot Security Starter ....................... SKIPPED
+[INFO] Spring Boot Thymeleaf Starter ...................... SKIPPED
+[INFO] Spring Boot Undertow Starter ....................... SKIPPED
+[INFO] Spring Boot WebFlux Starter ........................ SKIPPED
+[INFO] Spring Boot WebSocket Starter ...................... SKIPPED
+[INFO] Spring Boot Web Services Starter ................... SKIPPED
+[INFO] Spring Boot CLI .................................... SKIPPED
+[INFO] Spring Boot Docs ................................... SKIPPED
+[INFO] Spring Boot Build .................................. SKIPPED
+[INFO] Spring Boot Samples Invoker ........................ SKIPPED
+[INFO] Spring Boot Tests .................................. SKIPPED
+[INFO] Spring Boot Integration Tests ...................... SKIPPED
+[INFO] Spring Boot Configuration Processor Tests .......... SKIPPED
+[INFO] Spring Boot DevTools Tests ......................... SKIPPED
+[INFO] Spring Boot Hibernate 5.2 tests .................... SKIPPED
+[INFO] Spring Boot Server Tests ........................... SKIPPED
+[INFO] Spring Boot Launch Script Integration Tests ........ SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 08:58 min
+[INFO] Finished at: 2018-12-04T11:07:28+08:00
+[INFO] Final Memory: 662M/1292M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.codehaus.mojo:exec-maven-plugin:1.6.0:exec (gradle) on project spring-boot-gradle-plugin: Command execution failed.: Process exited with an error: 1 (Exit value: 1) -> [Help 1]
+[ERROR]
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR]
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+[ERROR]
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <goals> -rf :spring-boot-gradle-plugin
+
+```
+此时需要开启vpn下载gradle相关的jar包
+
+下载好相关的依赖包即可愉快的玩耍了，spring-boot自带了很多的测试类，可以直接运行跟踪代码执行流程
 
-Spring Boot makes it easy to create Spring-powered, production-grade applications and
-services with absolute minimum fuss. It takes an opinionated view of the Spring platform
-so that new and existing users can quickly get to the bits they need.
-
-You can use Spring Boot to create stand-alone Java applications that can be started using
-`java -jar` or more traditional WAR deployments. We also provide a command line tool
-that runs spring scripts.
-
-Our primary goals are:
-
-* Provide a radically faster and widely accessible getting started experience for all
-Spring development
-* Be opinionated out of the box, but get out of the way quickly as requirements start to
-diverge from the defaults
-* Provide a range of non-functional features that are common to large classes of projects
-(e.g. embedded servers, security, metrics, health checks, externalized configuration)
-* Absolutely no code generation and no requirement for XML configuration
-
-
-
-== Installation and Getting Started
-The {docs}/htmlsingle/[reference documentation] includes detailed
-{docs}/htmlsingle/#getting-started-installing-spring-boot[installation instructions]
-as well as a comprehensive {docs}/htmlsingle/#getting-started-first-application[``getting
-started``] guide. Documentation is published in {docs}/htmlsingle/[HTML],
-{docs}/pdf/spring-boot-reference.pdf[PDF] and {docs}/epub/spring-boot-reference.epub[EPUB]
-formats.
-
-Here is a quick teaser of a complete Spring Boot application in Java:
-
-[source,java,indent=0]
-----
-	import org.springframework.boot.*;
-	import org.springframework.boot.autoconfigure.*;
-	import org.springframework.web.bind.annotation.*;
-
-	@RestController
-	@SpringBootApplication
-	public class Example {
-
-		@RequestMapping("/")
-		String home() {
-			return "Hello World!";
-		}
-
-		public static void main(String[] args) throws Exception {
-			SpringApplication.run(Example.class, args);
-		}
-
-	}
-----
-
-
-
-== Getting help
-Having trouble with Spring Boot? We'd like to help!
-
-* Check the {docs}/htmlsingle/[reference documentation], especially the
-  {docs}/htmlsingle/#howto[How-to's] -- they provide solutions to the most common
-  questions.
-* Learn the Spring basics -- Spring Boot builds on many other Spring projects, check
-  the https://spring.io[spring.io] web-site for a wealth of reference documentation. If
-  you are just starting out with Spring, try one of the https://spring.io/guides[guides].
-* If you are upgrading, read the https://github.com/spring-projects/spring-boot/wiki[release notes]
-  for upgrade instructions and "new and noteworthy" features.
-* Ask a question - we monitor https://stackoverflow.com[stackoverflow.com] for questions
-  tagged with https://stackoverflow.com/tags/spring-boot[`spring-boot`]. You can also chat
-  with the community on https://gitter.im/spring-projects/spring-boot[Gitter].
-* Report bugs with Spring Boot at https://github.com/spring-projects/spring-boot/issues[github.com/spring-projects/spring-boot/issues].
-
-
-
-== Reporting Issues
-Spring Boot uses GitHub's integrated issue tracking system to record bugs and feature
-requests. If you want to raise an issue, please follow the recommendations below:
-
-* Before you log a bug, please https://github.com/spring-projects/spring-boot/search?type=Issues[search the issue tracker]
-  to see if someone has already reported the problem.
-* If the issue doesn't already exist, https://github.com/spring-projects/spring-boot/issues/new[create a new issue].
-* Please provide as much information as possible with the issue report, we like to know
-  the version of Spring Boot that you are using, as well as your Operating System and
-  JVM version.
-* If you need to paste code, or include a stack trace use Markdown +++```+++ escapes
-  before and after your text.
-* If possible try to create a test-case or project that replicates the issue. You can
-  submit sample projects as pull-requests against the
-  https://github.com/spring-projects/spring-boot-issues[spring-boot-issues] GitHub
-  project. Use the issue number for the name of your project.
-
-
-
-== Building from Source
-You don't need to build from source to use Spring Boot (binaries in
-https://repo.spring.io[repo.spring.io]), but if you want to try out the latest and
-greatest, Spring Boot can be easily built with the
-https://github.com/takari/maven-wrapper[maven wrapper]. You also need JDK 1.8.
-
-[indent=0]
-----
-	$ ./mvnw clean install
-----
-
-If you want to build with the regular `mvn` command, you will need
-https://maven.apache.org/run-maven/index.html[Maven v3.5.0 or above].
-
-NOTE: You may need to increase the amount of memory available to Maven by setting
-a `MAVEN_OPTS` environment variable with the value `-Xmx512m`. Remember
-to set the corresponding property in your IDE as well if you are building and running
-tests there (e.g. in Eclipse go to `Preferences->Java->Installed JREs` and edit the
-JRE definition so that all processes are launched with those arguments). This property
-is automatically set if you use the maven wrapper.
-
-_Also see link:CONTRIBUTING.adoc[CONTRIBUTING.adoc] if you wish to submit pull requests,
-and in particular please fill out the
-https://support.springsource.com/spring_committer_signup[Contributor's Agreement]
-before your first change, however trivial._
-
-=== Building reference documentation
-
-First of all, make sure you have built the project:
-
-[indent=0]
-----
-	$ ./mvnw clean install
-----
-
-The reference documentation requires the documentation of the Maven plugin to be
-available so you need to build that first since it's not generated by default.
-
-[indent=0]
-----
-	$ ./mvnw clean install -pl spring-boot-project/spring-boot-tools/spring-boot-maven-plugin -Pdefault,full
-----
-
-The documentation also includes auto-generated information about the starters. You might
-have that in your local repository already (per the first step) but if you want to refresh
-it:
-
-[indent=0]
-----
-	$ ./mvnw clean install -f spring-boot-project/spring-boot-starters
-----
-
-Once this is done, you can build the reference documentation with the command below:
-
-[indent=0]
-----
-	$ ./mvnw clean prepare-package -pl spring-boot-project/spring-boot-docs -Pdefault,full
-----
-
-TIP: The generated documentation is available from `spring-boot-project/spring-boot-docs/target/contents/reference`
-
-
-== Modules
-There are a number of modules in Spring Boot, here is a quick overview:
-
-
-
-=== spring-boot
-The main library providing features that support the other parts of Spring Boot,
-these include:
-
-* The `SpringApplication` class, providing static convenience methods that make it easy
-to write a stand-alone Spring Application. Its sole job is to create and refresh an
-appropriate Spring `ApplicationContext`
-* Embedded web applications with a choice of container (Tomcat, Jetty or Undertow)
-* First class externalized configuration support
-* Convenience `ApplicationContext` initializers, including support for sensible logging
-defaults
-
-
-
-=== spring-boot-autoconfigure
-Spring Boot can configure large parts of common applications based on the content
-of their classpath. A single `@EnableAutoConfiguration` annotation triggers
-auto-configuration of the Spring context.
-
-Auto-configuration attempts to deduce which beans a user might need. For example, if
-`HSQLDB` is on the classpath, and the user has not configured any database connections,
-then they probably want an in-memory database to be defined. Auto-configuration will
-always back away as the user starts to define their own beans.
-
-
-
-=== spring-boot-starters
-Starters are a set of convenient dependency descriptors that you can include in
-your application. You get a one-stop-shop for all the Spring and related technology
-that you need without having to hunt through sample code and copy paste loads of
-dependency descriptors. For example, if you want to get started using Spring and JPA for
-database access just include the `spring-boot-starter-data-jpa` dependency in your
-project, and you are good to go.
-
-
-
-=== spring-boot-cli
-The Spring command line application compiles and runs Groovy source, making it super
-easy to write the absolute minimum of code to get an application running. Spring CLI
-can also watch files, automatically recompiling and restarting when they change.
-
-
-
-=== spring-boot-actuator
-Actuator endpoints let you monitor and interact with your application.
-Spring Boot Actuator provides the infrastructure required for actuator endpoints. It contains
-annotation support for actuator endpoints. Out of the box, this module provides a number of endpoints
-including the `HealthEndpoint`, `EnvironmentEndpoint`, `BeansEndpoint` and many more.
-
-
-
-=== spring-boot-actuator-autoconfigure
-This provides auto-configuration for actuator endpoints based on the content of the classpath and a set of properties.
-For instance, if Micrometer is on the classpath, it will auto-configure the `MetricsEndpoint`.
-It contains configuration to expose endpoints over HTTP or JMX.
-Just like Spring Boot AutoConfigure, this will back away as the user starts to define their own beans.
-
-
-
-=== spring-boot-test
-This module contains core items and annotations that can be helpful when testing your application.
-
-
-
-=== spring-boot-test-autoconfigure
-Like other Spring Boot auto-configuration modules, spring-boot-test-autoconfigure, provides auto-configuration
-for tests based on the classpath. It includes a number of annotations that can be used to automatically
-configure a slice of your application that needs to be tested.
-
-
-
-=== spring-boot-loader
-Spring Boot Loader provides the secret sauce that allows you to build a single jar file
-that can be launched using `java -jar`. Generally you will not need to use
-`spring-boot-loader` directly, but instead work with the
-link:spring-boot-project/spring-boot-tools/spring-boot-gradle-plugin[Gradle] or
-link:spring-boot-project/spring-boot-tools/spring-boot-maven-plugin[Maven] plugin.
-
-
-
-=== spring-boot-devtools
-The spring-boot-devtools module provides additional development-time features such as automatic restarts,
-for a smoother application development experience. Developer tools are automatically disabled when
-running a fully packaged application.
-
-
-
-== Samples
-Groovy samples for use with the command line application are available in
-link:spring-boot-project/spring-boot-cli/samples[spring-boot-cli/samples]. To run the CLI samples type
-`spring run <sample>.groovy` from samples directory.
-
-Java samples are available in link:spring-boot-samples[spring-boot-samples] and should
-be built with maven and run by invoking `java -jar target/<sample>.jar`.
-
-
-
-== Guides
-The https://spring.io/[spring.io] site contains several guides that show how to use Spring
-Boot step-by-step:
-
-* https://spring.io/guides/gs/spring-boot/[Building an Application with Spring Boot] is a
-  very basic guide that shows you how to create a simple application, run it and add some
-  management services.
-* https://spring.io/guides/gs/actuator-service/[Building a RESTful Web Service with Spring
-  Boot Actuator] is a guide to creating a REST web service and also shows how the server
-  can be configured.
-* https://spring.io/guides/gs/convert-jar-to-war/[Converting a Spring Boot JAR Application
-  to a WAR] shows you how to run applications in a web server as a WAR file.
-
-
-
-== License
-Spring Boot is Open Source software released under the
-http://www.apache.org/licenses/LICENSE-2.0.html[Apache 2.0 license].
