@@ -1,2 +1,6 @@
-1、源码调试环境搭建
-进入项目根路径，执行maven命令：mvn clean install -Dmaven.test.skip=true -Dmaven.test.failure.ignore=true，下载好相关的依赖包即可愉快的玩耍了，spring-boot自带了很多的测试类，可以直接运行跟踪代码执行流程
+### 1、源码调试环境搭建
+#### 进入项目根路径，执行maven命令：
+```java 
+mvn clean install -Dmaven.test.skip=true -Dmaven.test.failure.ignore=true````
+
+耐心等待几分钟，下载好相关的依赖包即可愉快的玩耍了，spring-boot自带了很多的测试类，可以直接运行跟踪代码执行流程
