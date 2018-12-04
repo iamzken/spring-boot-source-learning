@@ -1069,7 +1069,7 @@ org.apache.commons.exec.ExecuteException: Process exited with an error: 1 (Exit 
 [INFO] Spring Boot Loader ................................. SUCCESS [01:23 min]
 [INFO] Spring Boot Loader Tools ........................... SUCCESS [  2.496 s]
 [INFO] Spring Boot Antlib ................................. SUCCESS [ 16.718 s]
-**[INFO] Spring Boot Gradle Plugin .......................... FAILURE [03:37 min]**
+[INFO] Spring Boot Gradle Plugin .......................... FAILURE [03:37 min]
 [INFO] Spring Boot Maven Plugin ........................... SKIPPED
 [INFO] Spring Boot ActiveMQ Starter ....................... SKIPPED
 [INFO] Spring Boot AMQP Starter ........................... SKIPPED
@@ -1152,5 +1152,7 @@ org.apache.commons.exec.ExecuteException: Process exited with an error: 1 (Exit 
 [ERROR]   mvn <goals> -rf :spring-boot-gradle-plugin
 
 ```
+此时需要开启vpn下载gradle相关的jar包
+
 下载好相关的依赖包即可愉快的玩耍了，spring-boot自带了很多的测试类，可以直接运行跟踪代码执行流程
 
