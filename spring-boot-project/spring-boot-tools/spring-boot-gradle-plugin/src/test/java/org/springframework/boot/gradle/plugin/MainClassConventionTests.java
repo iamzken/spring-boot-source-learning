@@ -20,10 +20,10 @@ import java.io.IOException;
 
 import org.gradle.api.Project;
 import org.gradle.api.plugins.ExtraPropertiesExtension;
-import org.gradle.internal.impldep.org.junit.Before;
-import org.gradle.internal.impldep.org.junit.Rule;
-import org.gradle.internal.impldep.org.junit.Test;
-import org.gradle.internal.impldep.org.junit.rules.TemporaryFolder;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 import org.gradle.testfixtures.ProjectBuilder;
 
 import org.springframework.boot.gradle.dsl.SpringBootExtension;

@@ -79,6 +79,7 @@ public class SpringApplicationBuilderTests {
 
 	@Test
 	public void propertiesAsMap() {
+
 		SpringApplicationBuilder application = new SpringApplicationBuilder()
 				.sources(ExampleConfig.class).contextClass(StaticApplicationContext.class)
 				.properties(Collections.singletonMap("bar", "foo"));
