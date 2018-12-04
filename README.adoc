@@ -415,3 +415,147 @@ at-2.2.0.BUILD-SNAPSHOT.jar
 [INFO] Finished at: 2018-12-04T12:44:15+08:00
 [INFO] Final Memory: 667M/1335M
 [INFO] ------------------------------------------------------------------------
+````
+异常情况下的日志：
+```java
+org.apache.commons.exec.ExecuteException: Process exited with an error: 1 (Exit value: 1)
+        at org.apache.commons.exec.DefaultExecutor.executeInternal(DefaultExecutor.java:404)
+        at org.apache.commons.exec.DefaultExecutor.execute(DefaultExecutor.java:166)
+        at org.codehaus.mojo.exec.ExecMojo.executeCommandLine(ExecMojo.java:804)
+        at org.codehaus.mojo.exec.ExecMojo.executeCommandLine(ExecMojo.java:751)
+        at org.codehaus.mojo.exec.ExecMojo.execute(ExecMojo.java:313)
+        at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:134)
+        at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:208)
+        at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:154)
+        at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:146)
+        at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:117)
+        at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:81)
+        at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:51)
+        at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+        at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:309)
+        at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:194)
+        at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:107)
+        at org.apache.maven.cli.MavenCli.execute(MavenCli.java:993)
+        at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:345)
+        at org.apache.maven.cli.MavenCli.main(MavenCli.java:191)
+        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.lang.reflect.Method.invoke(Method.java:498)
+        at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:289)
+        at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:229)
+        at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:415)
+        at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:356)
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO]
+[INFO] Spring Boot Build .................................. SUCCESS [  2.567 s]
+[INFO] Spring Boot Dependencies ........................... SUCCESS [  5.921 s]
+[INFO] Spring Boot Parent ................................. SUCCESS [  0.610 s]
+[INFO] Spring Boot Tools .................................. SUCCESS [  0.356 s]
+[INFO] Spring Boot Testing Support ........................ SUCCESS [  6.503 s]
+[INFO] Spring Boot Configuration Processor ................ SUCCESS [  5.442 s]
+[INFO] Spring Boot ........................................ SUCCESS [ 55.985 s]
+[INFO] Spring Boot Test ................................... SUCCESS [ 13.099 s]
+[INFO] Spring Boot Auto-Configure Annotation Processor .... SUCCESS [  1.498 s]
+[INFO] Spring Boot AutoConfigure .......................... SUCCESS [01:00 min]
+[INFO] Spring Boot Actuator ............................... SUCCESS [ 17.455 s]
+[INFO] Spring Boot Actuator AutoConfigure ................. SUCCESS [ 15.215 s]
+[INFO] Spring Boot Developer Tools ........................ SUCCESS [  4.353 s]
+[INFO] Spring Boot Configuration Metadata ................. SUCCESS [  0.719 s]
+[INFO] Spring Boot Starters ............................... SUCCESS [  1.849 s]
+[INFO] Spring Boot Logging Starter ........................ SUCCESS [  1.770 s]
+[INFO] Spring Boot Starter ................................ SUCCESS [  1.314 s]
+[INFO] Spring Boot Test Auto-Configure .................... SUCCESS [  4.109 s]
+[INFO] Spring Boot Test Starter ........................... SUCCESS [  1.314 s]
+[INFO] Spring Boot Properties Migrator .................... SUCCESS [  0.540 s]
+[INFO] Spring Boot Loader ................................. SUCCESS [01:23 min]
+[INFO] Spring Boot Loader Tools ........................... SUCCESS [  2.496 s]
+[INFO] Spring Boot Antlib ................................. SUCCESS [ 16.718 s]
+[INFO] Spring Boot Gradle Plugin .......................... FAILURE [03:37 min]
+[INFO] Spring Boot Maven Plugin ........................... SKIPPED
+[INFO] Spring Boot ActiveMQ Starter ....................... SKIPPED
+[INFO] Spring Boot AMQP Starter ........................... SKIPPED
+[INFO] Spring Boot AOP Starter ............................ SKIPPED
+[INFO] Spring Boot Artemis Starter ........................ SKIPPED
+[INFO] Spring Boot JDBC Starter ........................... SKIPPED
+[INFO] Spring Boot Batch Starter .......................... SKIPPED
+[INFO] Spring Boot Cache Starter .......................... SKIPPED
+[INFO] Spring Boot Spring Cloud Connectors Starter ........ SKIPPED
+[INFO] Spring Boot Data Cassandra Starter ................. SKIPPED
+[INFO] Spring Boot Data Cassandra Reactive Starter ........ SKIPPED
+[INFO] Spring Boot Data Couchbase Starter ................. SKIPPED
+[INFO] Spring Boot Data Couchbase Reactive Starter ........ SKIPPED
+[INFO] Spring Boot Data Elasticsearch Starter ............. SKIPPED
+[INFO] Spring Boot Data JDBC Starter ...................... SKIPPED
+[INFO] Spring Boot Data JPA Starter ....................... SKIPPED
+[INFO] Spring Boot Data LDAP Starter ...................... SKIPPED
+[INFO] Spring Boot Data MongoDB Starter ................... SKIPPED
+[INFO] Spring Boot Data MongoDB Reactive Starter .......... SKIPPED
+[INFO] Spring Boot Data Neo4j Starter ..................... SKIPPED
+[INFO] Spring Boot Data Redis Starter ..................... SKIPPED
+[INFO] Spring Boot Data Redis Reactive Starter ............ SKIPPED
+[INFO] Spring Boot Json Starter ........................... SKIPPED
+[INFO] Spring Boot Tomcat Starter ......................... SKIPPED
+[INFO] Spring Boot Web Starter ............................ SKIPPED
+[INFO] Spring Boot Data REST Starter ...................... SKIPPED
+[INFO] Spring Boot Data Solr Starter ...................... SKIPPED
+[INFO] Spring Boot FreeMarker Starter ..................... SKIPPED
+[INFO] Spring Boot Groovy Templates Starter ............... SKIPPED
+[INFO] Spring Boot HATEOAS Starter ........................ SKIPPED
+[INFO] Spring Boot Integration Starter .................... SKIPPED
+[INFO] Spring Boot Validation Starter ..................... SKIPPED
+[INFO] Spring Boot Jersey Starter ......................... SKIPPED
+[INFO] Spring Boot Jetty Starter .......................... SKIPPED
+[INFO] Spring Boot JOOQ Starter ........................... SKIPPED
+[INFO] Spring Boot Atomikos JTA Starter ................... SKIPPED
+[INFO] Spring Boot Bitronix JTA Starter ................... SKIPPED
+[INFO] Spring Boot Log4j 2 Starter ........................ SKIPPED
+[INFO] Spring Boot Mail Starter ........................... SKIPPED
+[INFO] Spring Boot Mustache Starter ....................... SKIPPED
+[INFO] Spring Boot Actuator Starter ....................... SKIPPED
+[INFO] Spring Boot OAuth2/OpenID Connect Client Starter ... SKIPPED
+[INFO] Spring Boot OAuth2 Resource Server Starter ......... SKIPPED
+[INFO] Spring Boot Starter Parent ......................... SKIPPED
+[INFO] Spring Boot Quartz Starter ......................... SKIPPED
+[INFO] Spring Boot Reactor Netty Starter .................. SKIPPED
+[INFO] Spring Boot Security Starter ....................... SKIPPED
+[INFO] Spring Boot Thymeleaf Starter ...................... SKIPPED
+[INFO] Spring Boot Undertow Starter ....................... SKIPPED
+[INFO] Spring Boot WebFlux Starter ........................ SKIPPED
+[INFO] Spring Boot WebSocket Starter ...................... SKIPPED
+[INFO] Spring Boot Web Services Starter ................... SKIPPED
+[INFO] Spring Boot CLI .................................... SKIPPED
+[INFO] Spring Boot Docs ................................... SKIPPED
+[INFO] Spring Boot Build .................................. SKIPPED
+[INFO] Spring Boot Samples Invoker ........................ SKIPPED
+[INFO] Spring Boot Tests .................................. SKIPPED
+[INFO] Spring Boot Integration Tests ...................... SKIPPED
+[INFO] Spring Boot Configuration Processor Tests .......... SKIPPED
+[INFO] Spring Boot DevTools Tests ......................... SKIPPED
+[INFO] Spring Boot Hibernate 5.2 tests .................... SKIPPED
+[INFO] Spring Boot Server Tests ........................... SKIPPED
+[INFO] Spring Boot Launch Script Integration Tests ........ SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 08:58 min
+[INFO] Finished at: 2018-12-04T11:07:28+08:00
+[INFO] Final Memory: 662M/1292M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.codehaus.mojo:exec-maven-plugin:1.6.0:exec (gradle) on project spring-boot-gradle-plugin: Command execution failed.: Process exited with an error: 1 (Exit value: 1) -> [Help 1]
+[ERROR]
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR]
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+[ERROR]
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <goals> -rf :spring-boot-gradle-plugin
+
+```
+此时需要开启vpn下载gradle相关的jar包
+
+下载好相关的依赖包即可愉快的玩耍了，spring-boot自带了很多的测试类，可以直接运行跟踪代码执行流程
+
