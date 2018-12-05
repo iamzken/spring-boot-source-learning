@@ -30,10 +30,13 @@ import org.junit.Test;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.ApplicationEvent;
+import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.SimpleApplicationEventMulticaster;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -71,8 +74,12 @@ public class SpringApplicationAdminMXBeanRegistrarTests {
 		final ObjectName objectName = createObjectName(OBJECT_NAME);
 		SpringApplication application = new SpringApplication(Config.class);
 		application.setWebApplicationType(WebApplicationType.NONE);
+		/**
+		 * 监听器最终是在{@link SimpleApplicationEventMulticaster#doInvokeListener(ApplicationListener, ApplicationEvent)}方法里触发
+		 */
 		application.addListeners((ContextRefreshedEvent event) -> {
 			try {
+				System.out.println("监听器内：" + isApplicationReady(objectName));
 				assertThat(isApplicationReady(objectName)).isFalse();
 			}
 			catch (Exception ex) {
@@ -81,6 +88,7 @@ public class SpringApplicationAdminMXBeanRegistrarTests {
 			}
 		});
 		this.context = application.run();
+		System.out.println("监听器外：" + isApplicationReady(objectName));
 		assertThat(isApplicationReady(objectName)).isTrue();
 	}
 
