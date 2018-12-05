@@ -92,6 +92,82 @@ public class SpringApplicationAdminMXBeanRegistrarTests {
 		assertThat(isApplicationReady(objectName)).isTrue();
 	}
 
+	/**
+	 * 如果用JRebel Debug测试，会出现如下错误：
+	 * 2018-12-05 18:36:12 JRebel: ERROR Class 'net.bytebuddy.dynamic.loading.ClassInjector$UsingReflection' could not be processed by org.zeroturnaround.javarebel.integration.proxy.bytebuddy.ClassInjectorUsingCBP@null: org.zeroturnaround.bundled.javassist.NotFoundException: inject(..) is not found in net.bytebuddy.dynamic.loading.ClassInjector$UsingReflection
+	 at org.zeroturnaround.bundled.javassist.CtClassType.getDeclaredMethod(SourceFile:1306)
+	 at org.zeroturnaround.javarebel.integration.support.CBPs$DirectProcessorImpl.instrument(SourceFile:235)
+	 at org.zeroturnaround.javarebel.integration.proxy.bytebuddy.ClassInjectorUsingCBP.process(SourceFile:14)
+	 at org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor.process(SourceFile:105)
+	 at org.zeroturnaround.javarebel.integration.support.CacheAwareJavassistClassBytecodeProcessor.process(SourceFile:34)
+	 at org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor.process(SourceFile:74)
+	 at com.zeroturnaround.javarebel.xx.a(SourceFile:359)
+	 at com.zeroturnaround.javarebel.xx.a(SourceFile:348)
+	 at com.zeroturnaround.javarebel.xx.a(SourceFile:315)
+	 at com.zeroturnaround.javarebel.SDKIntegrationImpl.runBytecodeProcessors(SourceFile:45)
+	 at com.zeroturnaround.javarebel.vh.transform(SourceFile:134)
+	 at java.lang.ClassLoader.defineClass(ClassLoader.java:41009)
+	 at java.security.SecureClassLoader.defineClass(SecureClassLoader.java:142)
+	 at java.net.URLClassLoader.defineClass(URLClassLoader.java:467)
+	 at java.net.URLClassLoader.access$100(URLClassLoader.java:73)
+	 at java.net.URLClassLoader$1.run(URLClassLoader.java:368)
+	 at java.net.URLClassLoader$1.run(URLClassLoader.java:362)
+	 at java.security.AccessController.doPrivileged(Native Method)
+	 at java.net.URLClassLoader.findClass(URLClassLoader.java:361)
+	 at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+	 at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331)
+	 at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+	 at org.mockito.internal.creation.bytebuddy.SubclassInjectionLoader.<init>(SubclassInjectionLoader.java:28)
+	 at org.mockito.internal.creation.bytebuddy.SubclassByteBuddyMockMaker.<init>(SubclassByteBuddyMockMaker.java:33)
+	 at org.mockito.internal.creation.bytebuddy.ByteBuddyMockMaker.<init>(ByteBuddyMockMaker.java:21)
+	 at sun.reflect.GeneratedConstructorAccessor140.newInstance(Unknown Source)
+	 at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45005)
+	 at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	 at java.lang.Class.newInstance(Class.java:442)
+	 at org.mockito.internal.configuration.plugins.DefaultMockitoPlugins.create(DefaultMockitoPlugins.java:66)
+	 at org.mockito.internal.configuration.plugins.DefaultMockitoPlugins.getDefaultPlugin(DefaultMockitoPlugins.java:43)
+	 at org.mockito.internal.configuration.plugins.PluginLoader.loadPlugin(PluginLoader.java:67)
+	 at org.mockito.internal.configuration.plugins.PluginLoader.loadPlugin(PluginLoader.java:44)
+	 at org.mockito.internal.configuration.plugins.PluginRegistry.<init>(PluginRegistry.java:21)
+	 at org.mockito.internal.configuration.plugins.Plugins.<clinit>(Plugins.java:18)
+	 at org.mockito.internal.util.MockUtil.<clinit>(MockUtil.java:24)
+	 at org.mockito.internal.util.MockCreationValidator.validateType(MockCreationValidator.java:22)
+	 at org.mockito.internal.creation.MockSettingsImpl.validatedSettings(MockSettingsImpl.java:238)
+	 at org.mockito.internal.creation.MockSettingsImpl.build(MockSettingsImpl.java:226)
+	 at org.mockito.internal.MockitoCore.mock(MockitoCore.java:68)
+	 at org.mockito.Mockito.mock(Mockito.java:1896)
+	 at org.mockito.Mockito.mock(Mockito.java:1805)
+	 at org.springframework.boot.admin.SpringApplicationAdminMXBeanRegistrarTests.eventsFromOtherContextsAreIgnored(SpringApplicationAdminMXBeanRegistrarTests.java:99)
+	 at sun.reflect.GeneratedMethodAccessor5.invoke(Unknown Source)
+	 at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:45005)
+	 at java.lang.reflect.Method.invoke(Method.java:498)
+	 at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	 at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	 at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	 at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	 at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	 at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	 at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	 at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	 at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	 at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	 at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	 at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	 at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	 at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	 at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	 at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	 at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	 at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
+	 at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
+	 at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+
+	 Disconnected from the target VM, address: '127.0.0.1:50969', transport: 'socket'
+
+	 Process finished with exit code 0
+
+	 * @throws MalformedObjectNameException
+	 */
 	@Test
 	public void eventsFromOtherContextsAreIgnored() throws MalformedObjectNameException {
 		SpringApplicationAdminMXBeanRegistrar registrar = new SpringApplicationAdminMXBeanRegistrar(
